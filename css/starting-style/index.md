@@ -143,7 +143,7 @@ dialog:not([open]) {
 }
 ```
 
-<iframe title="Поповер, анимированный  с помощью starting-style" src="demos/popover-animation" height="360"></iframe>
+<iframe title="Анимация появления поповера" src="demos/popover-animation" height="360"></iframe>
 
 ## Подсказки
 
