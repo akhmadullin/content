@@ -1,5 +1,5 @@
 ---
-title: "@starting-style"
+title: "`@starting-style`"
 description: "Директива для описания начальных стилей элемента в момент его появления на экране"
 authors:
   - akhmadullin
