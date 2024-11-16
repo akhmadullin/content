@@ -93,6 +93,7 @@ groups:
       - media
       - supports
       - layer
+      - starting-style
   - name: 'Глобальные ключевые слова'
     items:
       - global-keywords
