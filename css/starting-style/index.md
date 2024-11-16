@@ -4,7 +4,9 @@ description: "Директива для описания начальных ст
 authors:
   - akhmadullin
 related:
-  - ""
+  - html/dialog
+  - html/popover
+  - css/opacity
 tags:
   - doka
 ---
