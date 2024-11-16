@@ -106,7 +106,7 @@ dialog:not([open]) {
 }
 ```
 
-<iframe title="Диалог, анимированный  с помощью starting-style" src="demos/dialog-animation" height="360"></iframe>
+<iframe title="Анимация появления диалога" src="demos/dialog-animation" height="360"></iframe>
 
 Такой же подход можно применить и для анимации поповера:
 
