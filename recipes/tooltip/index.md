@@ -216,7 +216,7 @@ tooltipAnchor.addEventListener('keydown', (event) => {
 
 ### Стили
 
-Сперва необходимо связать кнопку с тултипом. Для этого дадим кнопке «якорное имя» (`anchor-name: --button-el;`) и затем будем ссылаться на него (`position-anchor: --button-el;`).
+Сперва необходимо связать кнопку с тултипом. Для этого дадим кнопке «якорное имя» (`anchor-name: --button-el;`) и затем сошлёмся на него (`position-anchor: --button-el;`).
 
 ```css
 .tooltip-anchor {
