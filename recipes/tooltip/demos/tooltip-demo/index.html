@@ -140,7 +140,8 @@
       /* растягиваем хвостик между двумя якорями */
       top: anchor(--button-el end);
       bottom: anchor(--tooltip-el start);
-      transform: translateY(7px) rotate(45deg);
+      translate: 0 7px;
+      rotate: 45deg;
     }
 
     /* для кейса, когда тултип над кнопкой */
@@ -148,7 +149,8 @@
       /* растягиваем хвостик между двумя якорями */
       top: anchor(--tooltip-el end);
       bottom: anchor(--button-el start);
-      transform: translateY(-7px) rotate(45deg);
+      translate: 0 -7px;
+      rotate: 45deg;
     }
 
     /* для горизонтальной ориентации */
@@ -165,7 +167,8 @@
       /* растягиваем хвостик между двумя якорями */
       left: anchor(--button-el end);
       right: anchor(--tooltip-el start);
-      transform: translateX(7px) rotate(45deg);
+      translate: 7px;
+      rotate: 45deg;
     }
 
     /* для кейса, когда тултип слева от кнопки */
@@ -173,7 +176,8 @@
       /* растягиваем хвостик между двумя якорями */
       left: anchor(--tooltip-el end);
       right: anchor(--button-el start);
-      transform: translateX(-7px) rotate(45deg);
+      translate: -7px;
+      rotate: 45deg;
     }
   </style>
 </head>

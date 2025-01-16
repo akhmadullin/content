@@ -17,7 +17,7 @@ tags:
 
 ## Задача
 
-Тултип – распространённый паттерн в веб-интерфейсах. Представляет собой небольшую всплывающую подсказку к интерактивному элементу с дополнительной информацией о его функциях. Появляется при наведении на элемент или взаимодействии с ним с клавиатуры.
+Тултип – небольшая всплывающая подсказка с дополнительной информацией о функциях интерактивного элемента. Появляется при наведении курсора на элемент или взаимодействии с ним с клавиатуры. Это распространённый паттерн в веб-интерфейсах.
 
 Тултип полезен, когда у элемента нет подписи, только иконка. Или когда нужно подробнее раскрыть его назначение.
 
@@ -34,10 +34,19 @@ tags:
 Для начала создадим HTML-разметку со всеми необходимыми элементами:
 
 ```html
-<button class="button tooltip-anchor" id="tooltip-anchor" aria-describedby="tooltip">
+<button
+  class="button tooltip-anchor"
+  id="tooltip-anchor"
+  aria-describedby="tooltip"
+>
   ❤️
 </button>
-<div class="tooltip" id="tooltip" role="tooltip" popover="manual">
+<div
+  class="tooltip"
+  id="tooltip"
+  role="tooltip"
+  popover="manual"
+>
   <div class="tooltip-content">
     Добавить в «Избранное»
   </div>
@@ -132,13 +141,15 @@ tags:
 .tooltip::before {
   top: anchor(--button-el end);
   bottom: anchor(--tooltip-el start);
-  transform: translateY(7px) rotate(45deg);
+  translate: 0 7px;
+  rotate: 45deg;
 }
 
 .tooltip::after {
   top: anchor(--tooltip-el end);
   bottom: anchor(--button-el start);
-  transform: translateY(-7px) rotate(45deg);
+  translate: 0 -7px;
+  rotate: 45deg;
 }
 
 .tooltip .tooltip-content::before,
@@ -152,13 +163,15 @@ tags:
 .tooltip .tooltip-content::before {
   left: anchor(--button-el end);
   right: anchor(--tooltip-el start);
-  transform: translateX(7px) rotate(45deg);
+  translate: 7px;
+  rotate: 45deg;
 }
 
 .tooltip .tooltip-content::after {
   left: anchor(--tooltip-el end);
   right: anchor(--button-el start);
-  transform: translateX(-7px) rotate(45deg);
+  translate: -7px;
+  rotate: 45deg;
 }
 ```
 
@@ -204,10 +217,19 @@ tooltipAnchor.addEventListener('keydown', (event) => {
 В рецепте мы специально не связываем тултип с кнопкой с помощью атрибута [`popovertarget`](/html/popover/#obyazatelnye-atributy), так как хотим показывать тултип на ховер или [фокус](/js/element-focus/), а не на [клик](/js/element-click/).
 
 ```html
-<button class="button tooltip-anchor" id="tooltip-anchor" aria-describedby="tooltip">
+<button
+  class="button tooltip-anchor"
+  id="tooltip-anchor"
+  aria-describedby="tooltip"
+>
   ❤️
 </button>
-<div class="tooltip" id="tooltip" role="tooltip" popover="manual">
+<div
+  class="tooltip"
+  id="tooltip"
+  role="tooltip"
+  popover="manual"
+>
   <div class="tooltip-content">
     Добавить в «Избранное»
   </div>
@@ -299,7 +321,8 @@ tooltipAnchor.addEventListener('keydown', (event) => {
   /* растягиваем хвостик между двумя якорями */
   top: anchor(--button-el end);
   bottom: anchor(--tooltip-el start);
-  transform: translateY(7px) rotate(45deg);
+  translate: 0 7px;
+  rotate: 45deg;
 }
 
 /* для кейса, когда тултип над кнопкой */
@@ -307,7 +330,8 @@ tooltipAnchor.addEventListener('keydown', (event) => {
   /* растягиваем хвостик между двумя якорями */
   top: anchor(--tooltip-el end);
   bottom: anchor(--button-el start);
-  transform: translateY(-7px) rotate(45deg);
+  translate: 0 -7px;
+  rotate: 45deg;
 }
 ```
 
@@ -328,7 +352,8 @@ tooltipAnchor.addEventListener('keydown', (event) => {
   /* растягиваем хвостик между двумя якорями */
   left: anchor(--button-el end);
   right: anchor(--tooltip-el start);
-  transform: translateX(7px) rotate(45deg);
+  translate: 7px;
+  rotate: 45deg;
 }
 
 /* для кейса, когда тултип слева от кнопки */
@@ -336,7 +361,8 @@ tooltipAnchor.addEventListener('keydown', (event) => {
   /* растягиваем хвостик между двумя якорями */
   left: anchor(--tooltip-el end);
   right: anchor(--button-el start);
-  transform: translateX(-7px) rotate(45deg);
+  translate: -7px;
+  rotate: 45deg;
 }
 ```
 
