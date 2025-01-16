@@ -1,6 +1,6 @@
 ---
 title: "Тултип"
-description: "Верстаем тултип с использования Popover API и CSS Anchor Positioning"
+description: "Верстаем тултип с использованием Popover API и CSS Anchor Positioning."
 authors:
   - akhmadullin
 keywords:
@@ -19,9 +19,9 @@ tags:
 
 Тултип – распространённый паттерн в веб-интерфейсах. Представляет собой небольшую всплывающую подсказку к интерактивному элементу с дополнительной информацией о его функциях. Появляется при наведении на элемент или взаимодействии с ним с клавиатуры.
 
-Тултип может быть полезен, когда у элемента нет подписи, только иконка. Или когда нужно более подробно пояснить его назначение.
+Тултип полезен, когда у элемента нет подписи, только иконка. Или когда нужно подробнее раскрыть его назначение.
 
-В статье разберем способ создания тултипа, который может адаптироваться под изменение местоположения элемента. Тултип будет уметь рисоваться сверху, справа, снизу, слева от элемента, к которому он привязан, в зависимости от наличия свободного места на экране. Использовать для этого будет [`Popover API`](/html/popover/) и `CSS Anchor Positioning`.
+В статье разберём способ создания тултипа, который может адаптироваться под изменение местоположения элемента. Он будет появляться сверху, справа, снизу и слева от элемента в зависимости от наличия свободного места на экране. Использовать для этого будем [`Popover API`](/html/popover/) и `CSS Anchor Positioning`.
 
 <aside>
 
@@ -35,130 +35,130 @@ tags:
 
 ```html
 <button class="button tooltip-anchor" id="tooltip-anchor" aria-describedby="tooltip">
-    ❤️
+  ❤️
 </button>
 <div class="tooltip" id="tooltip" role="tooltip" popover="manual">
-    <div class="tooltip-content">
-        Добавить в «Избранное»
-    </div>
+  <div class="tooltip-content">
+    Добавить в «Избранное»
+  </div>
 </div>
 ```
 
-Внешнее оформление тултипа и его умение адаптироваться под местоположение элемента, к которому он приязан, опишем с помощью следующих [CSS-правил](/css/css-rule/):
+Внешнее оформление тултипа и его умение адаптироваться под местоположение элемента, к которому он привязан, опишем с помощью следующих [CSS-правил](/css/css-rule/):
 
 ```css
 .button {
-    display: block;
-    min-width: 210px;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    padding: 9px 15px;
-    color: #000000;
-    font-size: inherit;
-    font-weight: 300;
-    font-family: inherit;
-    transition: background-color 0.15s ease-in;
-    cursor: pointer;
-    background-color: #C56FFF;
+  display: block;
+  min-width: 210px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 9px 15px;
+  color: #000000;
+  font-size: inherit;
+  font-weight: 300;
+  font-family: inherit;
+  transition: background-color 0.15s ease-in;
+  cursor: pointer;
+  background-color: #C56FFF;
 }
 
 .button:hover {
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
 
 .button:focus-visible {
-    border: 2px solid #FFFFFF;
-    outline: none;
+  border: 2px solid #FFFFFF;
+  outline: none;
 }
 
 .button:focus {
-    border: 2px solid #FFFFFF;
-    outline: none;
+  border: 2px solid #FFFFFF;
+  outline: none;
 }
 
 .tooltip-anchor {
-    anchor-name: --button-el;
+  anchor-name: --button-el;
 }
 
 .tooltip {
-    inset: unset;
-    width: max-content;
-    margin: 10px;
-    padding: 10px 40px;
-    background-color: #FFFFFF;
-    color: #000000;
-    text-align: center;
-    position-anchor: --button-el;
-    position-area: top;
-    position-try-fallbacks: --bottom, --left, --right;
-    anchor-name: --tooltip-el;
+  inset: unset;
+  width: max-content;
+  margin: 10px;
+  padding: 10px 40px;
+  background-color: #FFFFFF;
+  color: #000000;
+  text-align: center;
+  position-anchor: --button-el;
+  position-area: top;
+  position-try-fallbacks: --bottom, --left, --right;
+  anchor-name: --tooltip-el;
 }
 
 @position-try --bottom {
-    position-area: bottom;
+  position-area: bottom;
 }
 
 @position-try --left {
-    position-area: left;
+  position-area: left;
 }
 
 @position-try --right {
-    position-area: right;
+  position-area: right;
 }
 
 .tooltip-content {
-    background-color: inherit;
+  background-color: inherit;
 }
 
 .tooltip::before,
 .tooltip::after,
 .tooltip .tooltip-content::before,
 .tooltip .tooltip-content::after  {
-    position-anchor: --button-el;
-    content: '';
-    position: fixed;
-    background-color: inherit;
-    margin: auto;
+  position-anchor: --button-el;
+  content: '';
+  position: fixed;
+  background-color: inherit;
+  margin: auto;
 }
 
 .tooltip::before,
 .tooltip::after {
-    left: anchor(--button-el start);
-    right: anchor(--button-el end);
-    width: 10px;
-    max-height: 10px;
+  left: anchor(--button-el start);
+  right: anchor(--button-el end);
+  width: 10px;
+  max-height: 10px;
 }
 
 .tooltip::before {
-    top: anchor(--button-el end);
-    bottom: anchor(--tooltip-el start);
-    transform: translateY(7px) rotate(45deg);
+  top: anchor(--button-el end);
+  bottom: anchor(--tooltip-el start);
+  transform: translateY(7px) rotate(45deg);
 }
 
 .tooltip::after {
-    top: anchor(--tooltip-el end);
-    bottom: anchor(--button-el start);
-    transform: translateY(-7px) rotate(45deg);
+  top: anchor(--tooltip-el end);
+  bottom: anchor(--button-el start);
+  transform: translateY(-7px) rotate(45deg);
 }
 
 .tooltip .tooltip-content::before,
 .tooltip .tooltip-content::after {
-    top: anchor(--button-el start);
-    bottom: anchor(--button-el end);
-    height: 10px;
-    max-width: 10px;
+  top: anchor(--button-el start);
+  bottom: anchor(--button-el end);
+  height: 10px;
+  max-width: 10px;
 }
 
 .tooltip .tooltip-content::before {
-    left: anchor(--button-el end);
-    right: anchor(--tooltip-el start);
-    transform: translateX(7px) rotate(45deg);
+  left: anchor(--button-el end);
+  right: anchor(--tooltip-el start);
+  transform: translateX(7px) rotate(45deg);
 }
 
 .tooltip .tooltip-content::after {
-    left: anchor(--tooltip-el end);
-    right: anchor(--button-el start);
-    transform: translateX(-7px) rotate(45deg);
+  left: anchor(--tooltip-el end);
+  right: anchor(--button-el start);
+  transform: translateX(-7px) rotate(45deg);
 }
 ```
 
@@ -169,12 +169,12 @@ const tooltip = document.querySelector('#tooltip')
 const tooltipAnchor = document.querySelector('#tooltip-anchor')
 
 const showTooltip = () => {
-    tooltip.showPopover()
-};
+  tooltip.showPopover()
+}
 
 const hideTooltip = () => {
-    tooltip.hidePopover()
-};
+  tooltip.hidePopover()
+}
 
 tooltipAnchor.addEventListener('mouseenter', showTooltip)
 tooltipAnchor.addEventListener('focus', showTooltip)
@@ -183,9 +183,9 @@ tooltipAnchor.addEventListener('mouseleave', hideTooltip)
 tooltipAnchor.addEventListener('blur', hideTooltip)
 
 tooltipAnchor.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        hideTooltip()
-    }
+  if (event.key === 'Escape') {
+    hideTooltip()
+  }
 })
 ```
 
@@ -197,64 +197,64 @@ tooltipAnchor.addEventListener('keydown', (event) => {
 
 ### Разметка
 
-В качестве интерактивного элемента будем использовать [кнопку](/html/button/). С помощью атрибута [`aria-describedby`](/a11y/aria-describedby/) связываем ее с тултипом.
+В качестве интерактивного элемента будем использовать [кнопку](/html/button/), а с помощью атрибута [`aria-describedby`](/a11y/aria-describedby/) свяжем её с тултипом.
 
-В качестве тултипа будем использовать [`div`](/html/div/). Добавляем ему соответствующую `role` – [`tooltip`](/a11y/role-tooltip/), чтобы ассистивные технологии понимали назначение элемента. Добавляем атрибут [`popover`](/html/popover/), чтобы уметь переключать видимость тултипа. Значение `manual` необходимо, чтобы тултип не скрывался при клике на кнопку.
+В качестве основы для тултипа возьмем [`div`](/html/div/). Добавим ему соответствующую `role` – [`tooltip`](/a11y/role-tooltip/), чтобы ассистивные технологии понимали назначение элемента. Не забудем атрибут [`popover`](/html/popover/), чтобы переключать видимость тултипа. Значение `manual` необходимо, чтобы тултип не скрывался при клике на кнопку.
 
-В данном рецепте мы специально не связываем тултип с кнопкой с помощью атрибута [`popovertarget`](/html/popover/), так как нам необходим показ тултипа на ховер или [фокус](/js/element-focus/), а не на [клик](/js/element-click/).
+В рецепте мы специально не связываем тултип с кнопкой с помощью атрибута [`popovertarget`](/html/popover/#obyazatelnye-atributy), так как хотим показывать тултип на ховер или [фокус](/js/element-focus/), а не на [клик](/js/element-click/).
 
 ```html
 <button class="button tooltip-anchor" id="tooltip-anchor" aria-describedby="tooltip">
-    ❤️
+  ❤️
 </button>
 <div class="tooltip" id="tooltip" role="tooltip" popover="manual">
-    <div class="tooltip-content">
-        Добавить в «Избранное»
-    </div>
+  <div class="tooltip-content">
+    Добавить в «Избранное»
+  </div>
 </div>
 ```
 
 ### Стили
 
-Сперва необходимо связать кнопку с тултипом. Для этого даем кнопке «якорное имя» (`anchor-name: --button-el;`) и затем ссылаемся на него (`position-anchor: --button-el;`).
+Сперва необходимо связать кнопку с тултипом. Для этого дадим кнопке «якорное имя» (`anchor-name: --button-el;`) и затем будем ссылаться на него (`position-anchor: --button-el;`).
 
 ```css
 .tooltip-anchor {
-    /* даём якорю (кнопке) имя */
-    anchor-name: --button-el;
+  /* даём якорю (кнопке) имя */
+  anchor-name: --button-el;
 }
 
 .tooltip {
-    /* ссылаемся на якорь, к которому привязан тултип */
-    position-anchor: --button-el;
+  /* ссылаемся на якорь, к которому привязан тултип */
+  position-anchor: --button-el;
 }
 ```
 
-Далее описываем доступные расположения тултипа относительно кнопки. Дефолтное положение – сверху (`position-area: top;`). Если расположить тултип сверху не удалось, просим браузер попробовать отрисовать тултип снизу, слева или справа (` position-try-fallbacks: --bottom, --left, --right;`). И описываем, что под этим подразумеваем.
+Далее описываем доступные расположения тултипа относительно кнопки. Дефолтное положение – сверху (`position-area: top;`). Если расположить тултип сверху не удалось, просим браузер отрисовать тултип снизу, слева или справа (` position-try-fallbacks: --bottom, --left, --right;`). И описываем, что под этим подразумеваем.
 
 ```css
 .tooltip {
-    /* выставляем дефолтное положение относительно якоря */
-    position-area: top;
-    /* добавляем фолбэки, если дефолт не отработал */
-    position-try-fallbacks: --bottom, --left, --right;
+  /* выставляем дефолтное положение относительно якоря */
+  position-area: top;
+  /* добавляем фолбэки, если дефолт не отработал */
+  position-try-fallbacks: --bottom, --left, --right;
 }
 
 /* описываем, что значат фолбэки */
 @position-try --bottom {
-    position-area: bottom;
+  position-area: bottom;
 }
 
 @position-try --left {
-    position-area: left;
+  position-area: left;
 }
 
 @position-try --right {
-    position-area: right;
+  position-area: right;
 }
 ```
 
-Создаем хвостики тултипа с помощью псевдо-элементов [`::after`](/css/after/) и [`::before`](/css/before/). Фактически, у нас будет 4 хвостика, но в каждом из возможных четырех положениях тултипа (сверху, снизу, справа, слева) будет виден только один хвостик.
+Создаем хвостики тултипа с помощью псевдо-элементов [`::after`](/css/after/) и [`::before`](/css/before/). Фактически, у нас будет 4 хвостика, но в каждом из возможных четырёх положений тултипа (сверху, снизу, справа, слева) увидим только один.
 
 ```css
 /* хвостики */
@@ -262,12 +262,12 @@ tooltipAnchor.addEventListener('keydown', (event) => {
 .tooltip::after,
 .tooltip .tooltip-content::before,
 .tooltip .tooltip-content::after  {
-    /* якоримся на тот же элемент, что и тултип */
-    position-anchor: --button-el;
-    content: '';
-    position: fixed;
-    background: inherit;
-    margin: auto;
+  /* якоримся на тот же элемент, что и тултип */
+  position-anchor: --button-el;
+  content: '';
+  position: fixed;
+  background: inherit;
+  margin: auto;
 }
 ```
 
@@ -275,8 +275,8 @@ tooltipAnchor.addEventListener('keydown', (event) => {
 
 ```css
 .tooltip-anchor {
-    /* делаем тултип якорем */
-    anchor-name: --tooltip-el;
+  /* делаем тултип якорем */
+  anchor-name: --tooltip-el;
 }
 ```
 
@@ -288,26 +288,26 @@ tooltipAnchor.addEventListener('keydown', (event) => {
 /* для вертикальной ориентации */
 .tooltip::before,
 .tooltip::after {
-    left: anchor(--button-el start);
-    right: anchor(--button-el end);
-    width: 10px;
-    max-height: 10px;
+  left: anchor(--button-el start);
+  right: anchor(--button-el end);
+  width: 10px;
+  max-height: 10px;
 }
 
 /* для кейса, когда тултип под кнопкой */
 .tooltip::before {
-    /* растягиваем хвостик между двумя якорями */
-    top: anchor(--button-el end);
-    bottom: anchor(--tooltip-el start);
-    transform: translateY(7px) rotate(45deg);
+  /* растягиваем хвостик между двумя якорями */
+  top: anchor(--button-el end);
+  bottom: anchor(--tooltip-el start);
+  transform: translateY(7px) rotate(45deg);
 }
 
 /* для кейса, когда тултип над кнопкой */
 .tooltip::after {
-    /* растягиваем хвостик между двумя якорями */
-    top: anchor(--tooltip-el end);
-    bottom: anchor(--button-el start);
-    transform: translateY(-7px) rotate(45deg);
+  /* растягиваем хвостик между двумя якорями */
+  top: anchor(--tooltip-el end);
+  bottom: anchor(--button-el start);
+  transform: translateY(-7px) rotate(45deg);
 }
 ```
 
@@ -317,32 +317,32 @@ tooltipAnchor.addEventListener('keydown', (event) => {
 /* для горизонтальной ориентации */
 .tooltip .tooltip-content::before,
 .tooltip .tooltip-content::after {
-    top: anchor(--button-el start);
-    bottom: anchor(--button-el end);
-    height: 10px;
-    max-width: 10px;
+  top: anchor(--button-el start);
+  bottom: anchor(--button-el end);
+  height: 10px;
+  max-width: 10px;
 }
 
 /* для кейса, когда тултип справа от кнопки */
 .tooltip .tooltip-content::before {
-    /* растягиваем хвостик между двумя якорями */
-    left: anchor(--button-el end);
-    right: anchor(--tooltip-el start);
-    transform: translateX(7px) rotate(45deg);
+  /* растягиваем хвостик между двумя якорями */
+  left: anchor(--button-el end);
+  right: anchor(--tooltip-el start);
+  transform: translateX(7px) rotate(45deg);
 }
 
 /* для кейса, когда тултип слева от кнопки */
 .tooltip .tooltip-content::after {
-    /* растягиваем хвостик между двумя якорями */
-    left: anchor(--tooltip-el end);
-    right: anchor(--button-el start);
-    transform: translateX(-7px) rotate(45deg);
+  /* растягиваем хвостик между двумя якорями */
+  left: anchor(--tooltip-el end);
+  right: anchor(--button-el start);
+  transform: translateX(-7px) rotate(45deg);
 }
 ```
 
 ### JavaScript
 
-Для начала найдём все элементы, которые понадобятся нам для работы с тултипом — сам тултип и кнопка, к которой он привязан:
+Для начала найдём все элементы, которые понадобятся нам для работы с тултипом, — сам тултип и кнопку, к которой он привязан.
 
 ```javascript
 const tooltip = document.querySelector('#tooltip')
@@ -353,15 +353,15 @@ const tooltipAnchor = document.querySelector('#tooltip-anchor')
 
 ```javascript
 const showTooltip = () => {
-    tooltip.showPopover()
-};
+  tooltip.showPopover()
+}
 
 const hideTooltip = () => {
-    tooltip.hidePopover()
-};
+  tooltip.hidePopover()
+}
 ```
 
-Навесим соответствующие обработчики событий на кнопку. Теперь она умеет показывать тултип на наведение мышью или фокусе с клавиатуры. Закрываться тултип будет при потери кнопкой ховера или фокуса, а также при нажатии на клавишу `Escape`.
+Навесим соответствующие обработчики событий на кнопку. Теперь она умеет показывать тултип на наведение мышью или фокусе с клавиатуры. Закрываться тултип будет при потере кнопкой ховера или фокуса, а также при нажатии на клавишу <kbd>Escape</kbd>.
 
 ```javascript
 tooltipAnchor.addEventListener('mouseenter', showTooltip)
@@ -371,8 +371,8 @@ tooltipAnchor.addEventListener('mouseleave', hideTooltip)
 tooltipAnchor.addEventListener('blur', hideTooltip)
 
 tooltipAnchor.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        hideTooltip()
-    }
+  if (event.key === 'Escape') {
+    hideTooltip()
+  }
 })
 ```
