@@ -229,6 +229,8 @@ groups:
       - element-set-property
       - element-scrollby
       - element-scrollintoview
+      - element-scrollsnapchange
+      - element-scrollsnapchanging
       - element-scrollto
       - element-classlist
       - element-dataset
